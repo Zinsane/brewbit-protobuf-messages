@@ -16,8 +16,8 @@ message ActivationNotification {
 }
 
 message AuthRequest {
-  required string device_id = 1  [(nanopb).max_size = 64];
-  required string auth_token = 2  [(nanopb).max_size = 64];
+  required string device_id         = 1  [(nanopb).max_size = 64];
+  required string activation_token  = 2  [(nanopb).max_size = 64];
 }
 
 message AuthResponse {
@@ -34,7 +34,7 @@ message DeviceReport {
 }
 
 message ApiMessage {
-  enum Type { 
+  enum Type {
     ACTIVATION_TOKEN_REQUEST = 1;
     ACTIVATION_TOKEN_RESPONSE = 2;
     ACTIVATION_NOTIFICATION = 3;
@@ -42,9 +42,9 @@ message ApiMessage {
     AUTH_RESPONSE = 5;
     DEVICE_REPORT = 6;
   }
-  
+
   required Type type = 1;
-  
+
   optional ActivationTokenRequest  activationTokenRequest = 2;
   optional ActivationTokenResponse activationTokenResponse = 3;
   optional ActivationNotification  activationNotification = 4;
