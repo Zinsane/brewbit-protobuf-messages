@@ -1,22 +1,23 @@
-package messages;
+import "nanopb.proto";
+
 // Sent by device to initiate activation process
 message ActivationTokenRequest {
-  required string device_id = 1;
+  required string device_id = 1 [(nanopb).max_size = 64];
 }
 
 // Sent by server in response to ActivationTokenRequest
 message ActivationTokenResponse {
-  optional string activation_token = 1; // Not present on error
+  optional string activation_token = 1  [(nanopb).max_size = 64]; // Not present on error
 }
 
 // Sent by server once activation is completed by user
 message ActivationNotification {
-  required string auth_token = 1;
+  required string auth_token = 1  [(nanopb).max_size = 64];
 }
 
 message AuthRequest {
-  required string device_id = 1;
-  required string auth_token = 2;
+  required string device_id = 1  [(nanopb).max_size = 64];
+  required string auth_token = 2  [(nanopb).max_size = 64];
 }
 
 message AuthResponse {
@@ -29,11 +30,11 @@ message ProbeReport {
 }
 
 message DeviceReport {
-  repeated ProbeReport probe_report = 1;
+  repeated ProbeReport probe_report = 1 [(nanopb).max_count = 8];
 }
 
 message ApiMessage {
-  enum Type {
+  enum Type { 
     ACTIVATION_TOKEN_REQUEST = 1;
     ACTIVATION_TOKEN_RESPONSE = 2;
     ACTIVATION_NOTIFICATION = 3;
@@ -41,13 +42,13 @@ message ApiMessage {
     AUTH_RESPONSE = 5;
     DEVICE_REPORT = 6;
   }
-
+  
   required Type type = 1;
-
+  
   optional ActivationTokenRequest  activationTokenRequest = 2;
   optional ActivationTokenResponse activationTokenResponse = 3;
   optional ActivationNotification  activationNotification = 4;
-  optional AuthRequest            authRequest = 5;
+  optional AuthRequest             authRequest = 5;
   optional AuthResponse            authResponse = 6;
   optional DeviceReport            deviceReport = 7;
 }
