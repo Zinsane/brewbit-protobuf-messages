@@ -25,30 +25,37 @@ message AuthResponse {
 }
 
 message ProbeReport {
-  required uint32 id = 1;
-  required float value = 2;
+  required uint32 id    = 1;
+  required float value  = 2;
 }
 
 message DeviceReport {
   repeated ProbeReport probe_report = 1 [(nanopb).max_count = 8];
 }
 
+message Error {
+  required uint32 code = 1 ;
+  required string body = 2 [(nanopb).max_size = 64];
+}
+
 message ApiMessage {
   enum Type {
-    ACTIVATION_TOKEN_REQUEST = 1;
+    ACTIVATION_TOKEN_REQUEST  = 1;
     ACTIVATION_TOKEN_RESPONSE = 2;
-    ACTIVATION_NOTIFICATION = 3;
-    AUTH_REQUEST = 4;
-    AUTH_RESPONSE = 5;
-    DEVICE_REPORT = 6;
+    ACTIVATION_NOTIFICATION   = 3;
+    AUTH_REQUEST              = 4;
+    AUTH_RESPONSE             = 5;
+    DEVICE_REPORT             = 6;
+    ERROR                     = 7;
   }
 
   required Type type = 1;
 
-  optional ActivationTokenRequest  activationTokenRequest = 2;
-  optional ActivationTokenResponse activationTokenResponse = 3;
-  optional ActivationNotification  activationNotification = 4;
-  optional AuthRequest             authRequest = 5;
-  optional AuthResponse            authResponse = 6;
-  optional DeviceReport            deviceReport = 7;
+  optional ActivationTokenRequest  activationTokenRequest   = 2;
+  optional ActivationTokenResponse activationTokenResponse  = 3;
+  optional ActivationNotification  activationNotification   = 4;
+  optional AuthRequest             authRequest              = 5;
+  optional AuthResponse            authResponse             = 6;
+  optional DeviceReport            deviceReport             = 7;
+  optional Error                   error                    = 8;
 }
