@@ -34,8 +34,8 @@ message WifiStatus {
 }
 
 message DeviceReport {
-  repeated probeReport probe_report = 1 [(nanopb).max_count = 8];
-  required wifiStatus wifi_status   = 1;
+  repeated ProbeReport probeReport = 1 [(nanopb).max_count = 8];
+  required WifiStatus wifiStatus   = 2;
 }
 
 message Error {
