@@ -29,8 +29,13 @@ message ProbeReport {
   required float value  = 2;
 }
 
+message WifiStatus {
+  required uint32 signal_strength = 1;
+}
+
 message DeviceReport {
-  repeated ProbeReport probe_report = 1 [(nanopb).max_count = 8];
+  repeated probeReport probe_report = 1 [(nanopb).max_count = 8];
+  required wifiStatus wifi_status   = 1;
 }
 
 message Error {
