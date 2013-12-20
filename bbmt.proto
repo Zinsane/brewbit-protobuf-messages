@@ -38,6 +38,15 @@ message Error {
   required string body = 2 [(nanopb).max_size = 64];
 }
 
+message UpdateRequest {
+  required int32 blah = 1;
+}
+
+message UpdateChunk {
+  required uint32 offset = 1;
+  required bytes data = 2 [(nanopb).max_size = 1024];
+}
+
 message ApiMessage {
   enum Type {
     ACTIVATION_TOKEN_REQUEST  = 1;
@@ -47,6 +56,8 @@ message ApiMessage {
     AUTH_RESPONSE             = 5;
     DEVICE_REPORT             = 6;
     ERROR                     = 7;
+    UPDATE_REQUEST            = 8;
+    UPDATE_CHUNK              = 9;
   }
 
   required Type type = 1;
@@ -58,4 +69,6 @@ message ApiMessage {
   optional AuthResponse            authResponse             = 6;
   optional DeviceReport            deviceReport             = 7;
   optional Error                   error                    = 8;
+  optional UpdateRequest           updateRequest            = 9;
+  optional UpdateChunk             updateChunk              = 10;
 }
