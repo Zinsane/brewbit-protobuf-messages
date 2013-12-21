@@ -39,7 +39,7 @@ message Error {
 }
 
 message UpdateRequest {
-  required int32 blah = 1;
+  required int32 device_version = 1;
 }
 
 message UpdateChunk {
