@@ -43,8 +43,9 @@ message UpdateRequest {
 }
 
 message UpdateChunk {
-  required uint32 offset = 1;
-  required bytes data = 2 [(nanopb).max_size = 1024];
+  required uint32 offset        = 1;
+  required uint32 total_packets = 2 ;
+  required bytes  data          = 3 [(nanopb).max_size = 1024];
 }
 
 message ApiMessage {
