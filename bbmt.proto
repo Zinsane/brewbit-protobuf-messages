@@ -38,14 +38,30 @@ message Error {
   required string body = 2 [(nanopb).max_size = 64];
 }
 
-message UpdateRequest {
-  required int32 device_version = 1;
+// @current_version Current firmware version on device
+message UpdateCheckRequest {
+  required string current_version = 1 [(nanopb).max_size = 16];
 }
 
+// @update_available true if there is a newer version, false otherwise
+// @version if update is available, version string for the latest version
+// @binary_size size, in bytes, of the binary update
+message UpdateCheckResponse {
+  required bool   update_available = 1;
+  optional string version          = 2 [(nanopb).max_size = 16];
+  optional uint32 binary_size      = 3;
+}
+
+// @requested_version version string to update to
+message UpdateRequest {
+  required string requested_version = 1 [(nanopb).max_size = 16];
+}
+
+// @offset offset in binary update file, in bytes
+// @data byte buffer of the binary update file
 message UpdateChunk {
-  required uint32 offset        = 1;
-  required uint32 total_packets = 2 ;
-  required bytes  data          = 3 [(nanopb).max_size = 1024];
+  required uint32 offset = 1;
+  required bytes  data   = 2 [(nanopb).max_size = 1024];
 }
 
 message ApiMessage {
