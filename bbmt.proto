@@ -39,53 +39,57 @@ message Error {
 }
 
 // @current_version Current firmware version on device
-message UpdateCheckRequest {
+message FirmwareUpdateCheckRequest {
   required string current_version = 1 [(nanopb).max_size = 16];
 }
 
 // @update_available true if there is a newer version, false otherwise
 // @version if update is available, version string for the latest version
 // @binary_size size, in bytes, of the binary update
-message UpdateCheckResponse {
+message FirmwareUpdateCheckResponse {
   required bool   update_available = 1;
   optional string version          = 2 [(nanopb).max_size = 16];
   optional uint32 binary_size      = 3;
 }
 
 // @requested_version version string to update to
-message UpdateRequest {
+message FirmwareDownloadRequest {
   required string requested_version = 1 [(nanopb).max_size = 16];
 }
 
 // @offset offset in binary update file, in bytes
 // @data byte buffer of the binary update file
-message UpdateChunk {
+message FirmwareDownloadResponse {
   required uint32 offset = 1;
   required bytes  data   = 2 [(nanopb).max_size = 1024];
 }
 
 message ApiMessage {
   enum Type {
-    ACTIVATION_TOKEN_REQUEST  = 1;
-    ACTIVATION_TOKEN_RESPONSE = 2;
-    ACTIVATION_NOTIFICATION   = 3;
-    AUTH_REQUEST              = 4;
-    AUTH_RESPONSE             = 5;
-    DEVICE_REPORT             = 6;
-    ERROR                     = 7;
-    UPDATE_REQUEST            = 8;
-    UPDATE_CHUNK              = 9;
+    ACTIVATION_TOKEN_REQUEST       = 1;
+    ACTIVATION_TOKEN_RESPONSE      = 2;
+    ACTIVATION_NOTIFICATION        = 3;
+    AUTH_REQUEST                   = 4;
+    AUTH_RESPONSE                  = 5;
+    DEVICE_REPORT                  = 6;
+    ERROR                          = 7;
+    FIRMWARE_UPDATE_CHECK_REQUEST  = 8;
+    FIRMWARE_UPDATE_CHECK_RESPONSE = 9;
+    FIRMWARE_DOWNLOAD_REQUEST      = 10;
+    FIRMWARE_DOWNLOAD_RESPONSE     = 11;
   }
 
   required Type type = 1;
 
-  optional ActivationTokenRequest  activationTokenRequest   = 2;
-  optional ActivationTokenResponse activationTokenResponse  = 3;
-  optional ActivationNotification  activationNotification   = 4;
-  optional AuthRequest             authRequest              = 5;
-  optional AuthResponse            authResponse             = 6;
-  optional DeviceReport            deviceReport             = 7;
-  optional Error                   error                    = 8;
-  optional UpdateRequest           updateRequest            = 9;
-  optional UpdateChunk             updateChunk              = 10;
+  optional ActivationTokenRequest      activationTokenRequest      = 2;
+  optional ActivationTokenResponse     activationTokenResponse     = 3;
+  optional ActivationNotification      activationNotification      = 4;
+  optional AuthRequest                 authRequest                 = 5;
+  optional AuthResponse                authResponse                = 6;
+  optional DeviceReport                deviceReport                = 7;
+  optional Error                       error                       = 8;
+  optional FirmwareUpdateCheckRequest  firmwareUpdateCheckRequest  = 9;
+  optional FirmwareUpdateCheckResponse firmwareUpdateCheckResponse = 10;
+  optional FirmwareDownloadRequest     firmwareDownloadRequest     = 11;
+  optional FirmwareDownloadResponse    firmwareDownloadResponse    = 12;
 }
