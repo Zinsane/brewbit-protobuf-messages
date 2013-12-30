@@ -16,8 +16,8 @@ message ActivationNotification {
 }
 
 message AuthRequest {
-  required string device_id         = 1  [(nanopb).max_size = 64];
-  required string activation_token  = 2  [(nanopb).max_size = 64];
+  required string device_id  = 1  [(nanopb).max_size = 64];
+  required string auth_token = 2  [(nanopb).max_size = 64];
 }
 
 message AuthResponse {
