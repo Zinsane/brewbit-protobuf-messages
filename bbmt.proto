@@ -64,6 +64,18 @@ message FirmwareDownloadResponse {
   required bytes  data   = 2 [(nanopb).max_size = 1024];
 }
 
+message OutputReport {
+  required uint32 id                = 1;
+  required uint32 function          = 2;
+  required uint32 compressor_delay  = 3;
+  required uint32 trigger_probe_id  = 4;
+}
+
+message DeviceSettingsNotification {
+  required string       name    = 1 [(nanopb).max_size = 100];
+  repeated OutputReport output  = 2 [(nanopb).max_count = 2];
+}
+
 message ApiMessage {
   enum Type {
     ACTIVATION_TOKEN_REQUEST       = 1;
@@ -77,6 +89,7 @@ message ApiMessage {
     FIRMWARE_UPDATE_CHECK_RESPONSE = 9;
     FIRMWARE_DOWNLOAD_REQUEST      = 10;
     FIRMWARE_DOWNLOAD_RESPONSE     = 11;
+    DEVICE_SETTINGS_NOTIFICATION   = 12;
   }
 
   required Type type = 1;
@@ -92,4 +105,5 @@ message ApiMessage {
   optional FirmwareUpdateCheckResponse firmwareUpdateCheckResponse = 10;
   optional FirmwareDownloadRequest     firmwareDownloadRequest     = 11;
   optional FirmwareDownloadResponse    firmwareDownloadResponse    = 12;
+  optional DeviceSettingsNotification  deviceSettingsNotification  = 13;
 }
