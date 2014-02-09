@@ -71,9 +71,15 @@ message OutputSettings {
   required uint32 trigger_probe_id  = 4;
 }
 
+message SensorSettings {
+  required uint32 id                = 1;
+  required uint32 setpoint          = 2;
+}
+
 message DeviceSettingsNotification {
-  required string        name    = 1 [(nanopb).max_size = 100];
+  required string         name    = 1 [(nanopb).max_size = 100];
   repeated OutputSettings output  = 2 [(nanopb).max_count = 2];
+  repeated SensorSettings sensor  = 3 [(nanopb).max_count = 2];
 }
 
 message ApiMessage {
