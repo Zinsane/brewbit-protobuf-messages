@@ -64,7 +64,7 @@ message FirmwareDownloadResponse {
   required bytes  data   = 2 [(nanopb).max_size = 1024];
 }
 
-message OutputReport {
+message OutputSettings {
   required uint32 id                = 1;
   required uint32 function          = 2;
   required uint32 compressor_delay  = 3;
@@ -72,8 +72,8 @@ message OutputReport {
 }
 
 message DeviceSettingsNotification {
-  required string       name    = 1 [(nanopb).max_size = 100];
-  repeated OutputReport output  = 2 [(nanopb).max_count = 2];
+  required string        name    = 1 [(nanopb).max_size = 100];
+  repeated OutputSettings output  = 2 [(nanopb).max_count = 2];
 }
 
 message ApiMessage {
