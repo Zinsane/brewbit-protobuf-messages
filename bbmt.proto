@@ -78,8 +78,14 @@ message OutputSettings {
 }
 
 message SensorSettings {
+  enum SetpointType{
+    STATIC  = 0;
+    DYNAMIC = 0;
+  }
+
   required uint32 id                = 1;
   required uint32 setpoint          = 2;
+  required uint32 setpoint_type     = 3;
 }
 
 message DeviceSettingsNotification {
