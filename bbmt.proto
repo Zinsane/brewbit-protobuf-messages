@@ -80,7 +80,7 @@ message OutputSettings {
 message SensorSettings {
   enum SetpointType{
     STATIC  = 0;
-    DYNAMIC = 0;
+    DYNAMIC = 1;
   }
 
   required uint32 id                  = 1;
