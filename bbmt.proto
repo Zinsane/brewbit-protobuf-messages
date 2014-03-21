@@ -83,9 +83,10 @@ message SensorSettings {
     DYNAMIC = 1;
   }
 
-  required uint32 id                  = 1;
-  required uint32 setpoint            = 2;
-  required SetpointType setpoint_type = 3;
+  required uint32       id                = 1;
+  required SetpointType setpoint_type     = 2;
+  optional float        static_setpoint   = 3;
+  optional uint32       dynamic_setpoint  = 4;
 }
 
 message DeviceSettingsNotification {
