@@ -65,6 +65,12 @@ message FirmwareDownloadResponse {
 }
 
 message OutputSettings {
+  enum Function{
+    HEATING = 0;
+    COOLING = 1;
+    MANUAL  = 2;
+  }
+
   required uint32 id                = 1;
   required uint32 function          = 2;
   required uint32 compressor_delay  = 3;
