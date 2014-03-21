@@ -72,9 +72,9 @@ message OutputSettings {
   }
 
   required uint32 id                = 1;
-  required uint32 function          = 2;
+  required Function function        = 2;
   required uint32 compressor_delay  = 3;
-  required uint32 trigger_sensor_id  = 4;
+  required uint32 trigger_sensor_id = 4;
 }
 
 message SensorSettings {
@@ -83,9 +83,9 @@ message SensorSettings {
     DYNAMIC = 0;
   }
 
-  required uint32 id                = 1;
-  required uint32 setpoint          = 2;
-  required uint32 setpoint_type     = 3;
+  required uint32 id                  = 1;
+  required uint32 setpoint            = 2;
+  required SetpointType setpoint_type = 3;
 }
 
 message DeviceSettingsNotification {
