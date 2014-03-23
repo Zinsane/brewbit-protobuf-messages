@@ -64,8 +64,24 @@ message FirmwareDownloadResponse {
   required bytes  data   = 2 [(nanopb).max_size = 1024];
 }
 
+message TempProfileStep {
+  enum TempProfileStepType {
+  	HOLD = 0;
+  	RAMP = 1;
+  }
+  
+  required uint32 duration          = 1;
+  required float value              = 2;
+  required TempProfileStepType type = 3;
+}
+
+message TempProfile {
+  required string name     = 1 [(nanopb).max_size = 100];
+  repeated TempProfileStep = 2 [(nanopb).max_count = 32];
+}
+
 message OutputSettings {
-  enum Function{
+  enum Function {
     HEATING = 0;
     COOLING = 1;
     MANUAL  = 2;
@@ -86,7 +102,7 @@ message SensorSettings {
   required uint32       id              = 1;
   required SetpointType setpoint_type   = 2;
   optional float        static_setpoint = 3;
-  optional uint32       temp_profile_id = 4;
+  optional TempProfile  temp_profile    = 4;
 }
 
 message DeviceSettingsNotification {
