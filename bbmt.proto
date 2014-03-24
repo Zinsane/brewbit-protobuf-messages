@@ -76,9 +76,10 @@ message TempProfileStep {
 }
 
 message TempProfile {
-  required string name           = 1 [(nanopb).max_size = 100];
-  required float start_value     = 2;
-  repeated TempProfileStep steps = 3 [(nanopb).max_count = 32];
+  required uint32 id             = 1;
+  required string name           = 2 [(nanopb).max_size = 100];
+  required float start_value     = 3;
+  repeated TempProfileStep steps = 4 [(nanopb).max_count = 32];
 }
 
 message OutputSettings {
@@ -103,12 +104,13 @@ message SensorSettings {
   required uint32       id              = 1;
   required SetpointType setpoint_type   = 2;
   optional float        static_setpoint = 3;
-  optional TempProfile  temp_profile    = 4;
+  optional uint32       temp_profile_id = 4;
 }
 
 message DeviceSettingsNotification {
-  repeated OutputSettings output  = 1 [(nanopb).max_count = 2];
-  repeated SensorSettings sensor  = 2 [(nanopb).max_count = 2];
+  repeated OutputSettings output     = 1 [(nanopb).max_count = 2];
+  repeated SensorSettings sensor     = 2 [(nanopb).max_count = 2];
+  repeated TempProfile temp_profiles = 3 [(nanopb).max_count = 32];
 }
 
 message ApiMessage {
