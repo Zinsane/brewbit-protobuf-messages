@@ -88,11 +88,17 @@ message OutputSettings {
     COOLING = 1;
     MANUAL  = 2;
   }
+  
+  enum OutputControlMode {
+    ON_OFF = 0;
+    PID    = 1;
+  }
 
-  required uint32 id                = 1;
-  required Function function        = 2;
-  required uint32 compressor_delay  = 3;
-  required uint32 trigger_sensor_id = 4;
+  required uint32 id                       = 1;
+  required Function function               = 2;
+  required uint32 compressor_delay         = 3;
+  required uint32 trigger_sensor_id        = 4;
+  required OutputControlMode output_mode   = 5;
 }
 
 message SensorSettings {
@@ -108,9 +114,9 @@ message SensorSettings {
 }
 
 message DeviceSettingsNotification {
-  repeated OutputSettings output     = 1 [(nanopb).max_count = 2];
-  repeated SensorSettings sensor     = 2 [(nanopb).max_count = 2];
-  repeated TempProfile temp_profiles = 3 [(nanopb).max_count = 32];
+  repeated OutputSettings output    = 1 [(nanopb).max_count = 2];
+  repeated SensorSettings sensor    = 2 [(nanopb).max_count = 2];
+  optional TempProfile temp_profile = 3;
 }
 
 message ApiMessage {
