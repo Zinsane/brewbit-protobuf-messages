@@ -76,8 +76,9 @@ message TempProfileStep {
 }
 
 message TempProfile {
-  required string name     = 1 [(nanopb).max_size = 100];
-  repeated TempProfileStep = 2 [(nanopb).max_count = 32];
+  required string name           = 1 [(nanopb).max_size = 100];
+  required float start_value     = 2;
+  repeated TempProfileStep steps = 3 [(nanopb).max_count = 32];
 }
 
 message OutputSettings {
