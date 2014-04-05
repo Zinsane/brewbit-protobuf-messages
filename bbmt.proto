@@ -114,9 +114,10 @@ message SensorSettings {
 }
 
 message DeviceSettingsNotification {
-  repeated OutputSettings output     = 1 [(nanopb).max_count = 2];
-  repeated SensorSettings sensor     = 2 [(nanopb).max_count = 2];
-  repeated TempProfile temp_profiles = 3 [(nanopb).max_count = 2];
+  required string name               = 1 [(nanopb).max_size = 100];
+  repeated OutputSettings output     = 2 [(nanopb).max_count = 2];
+  repeated SensorSettings sensor     = 3 [(nanopb).max_count = 2];
+  repeated TempProfile temp_profiles = 4 [(nanopb).max_count = 2];
 }
 
 message ApiMessage {
