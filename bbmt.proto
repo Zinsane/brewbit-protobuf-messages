@@ -27,6 +27,7 @@ message AuthResponse {
 message SensorReport {
   required uint32 id    = 1;
   required float value  = 2;
+  required float setpoint = 3;
 }
 
 message DeviceReport {
