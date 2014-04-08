@@ -24,14 +24,14 @@ message AuthResponse {
   required bool authenticated = 1;
 }
 
-message SensorReport {
-  required uint32 id    = 1;
-  required float value  = 2;
-  required float setpoint = 3;
+message ControllerReport {
+  required uint32 controller_index = 1;
+  required float sensor_reading    = 2;
+  required float setpoint          = 3;
 }
 
 message DeviceReport {
-  repeated SensorReport sensor_report = 1 [(nanopb).max_count = 8];
+  repeated ControllerReport controller_reports = 1 [(nanopb).max_count = 8];
 }
 
 message Error {
