@@ -95,30 +95,32 @@ message OutputSettings {
     PID    = 1;
   }
 
-  required uint32 id                       = 1;
+  required uint32 index                    = 1;
   required Function function               = 2;
   required uint32 cycle_delay              = 3;
-  required uint32 trigger_sensor_id        = 4;
-  required OutputControlMode output_mode   = 5;
+  required OutputControlMode output_mode   = 4;
 }
 
-message SensorSettings {
-  enum SetpointType{
+message ControllerSettings {
+  enum SetpointType {
     STATIC  = 0;
     TEMP_PROFILE = 1;
   }
 
-  required uint32       id              = 1;
-  required SetpointType setpoint_type   = 2;
-  optional float        static_setpoint = 3;
-  optional uint32       temp_profile_id = 4;
-}
-
-message DeviceSettingsNotification {
-  required string name               = 1 [(nanopb).max_size = 100];
-  repeated OutputSettings output     = 2 [(nanopb).max_count = 2];
-  repeated SensorSettings sensor     = 3 [(nanopb).max_count = 2];
-  repeated TempProfile temp_profiles = 4 [(nanopb).max_count = 2];
+  // Session settings
+  required string name                    = 1 [(nanopb).max_size = 100];
+  
+  // Controller settings
+  required uint32       sensor_index      = 2;
+  required SetpointType setpoint_type     = 3;
+  optional float        static_setpoint   = 4;
+  optional uint32       temp_profile_id   = 5;
+  
+  // Output settings
+  repeated OutputSettings output_settings = 6 [(nanopb).max_count = 2];
+  
+  // Temp profiles
+  repeated TempProfile temp_profiles      = 7 [(nanopb).max_count = 2];
 }
 
 message ApiMessage {
@@ -134,7 +136,7 @@ message ApiMessage {
     FIRMWARE_UPDATE_CHECK_RESPONSE = 9;
     FIRMWARE_DOWNLOAD_REQUEST      = 10;
     FIRMWARE_DOWNLOAD_RESPONSE     = 11;
-    DEVICE_SETTINGS_NOTIFICATION   = 12;
+    CONTROLLER_SETTINGS            = 12;
   }
 
   required Type type = 1;
@@ -150,5 +152,5 @@ message ApiMessage {
   optional FirmwareUpdateCheckResponse firmwareUpdateCheckResponse = 10;
   optional FirmwareDownloadRequest     firmwareDownloadRequest     = 11;
   optional FirmwareDownloadResponse    firmwareDownloadResponse    = 12;
-  optional DeviceSettingsNotification  deviceSettingsNotification  = 13;
+  optional ControllerSettings          controllerSettings           = 13;
 }
