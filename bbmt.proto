@@ -75,6 +75,7 @@ message DeviceSettings {
 
   required string name              = 1 [(nanopb).max_size = 100];
   required ControlMode control_mode = 2;
+  required float hysteresis         = 3;
 }
 
 message TempProfileStep {
@@ -105,7 +106,6 @@ message OutputSettings {
   required uint32 index       = 1;
   required Function function  = 2;
   required uint32 cycle_delay = 3;
-  required float hysteresis   = 4;
 }
 
 message ControllerSettings {
