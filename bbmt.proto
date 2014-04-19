@@ -72,7 +72,7 @@ message DeviceSettings {
     ON_OFF = 0;
     PID    = 1;
   }
-  
+
   required string name              = 1 [(nanopb).max_size = 100];
   required ControlMode control_mode = 2;
 }
@@ -82,7 +82,7 @@ message TempProfileStep {
   	HOLD = 0;
   	RAMP = 1;
   }
-  
+
   required uint32 duration          = 1;
   required float value              = 2;
   required TempProfileStepType type = 3;
@@ -102,9 +102,10 @@ message OutputSettings {
     MANUAL  = 2;
   }
 
-  required uint32 index                    = 1;
-  required Function function               = 2;
-  required uint32 cycle_delay              = 3;
+  required uint32 index       = 1;
+  required Function function  = 2;
+  required uint32 cycle_delay = 3;
+  required float hysteresis   = 4;
 }
 
 message ControllerSettings {
@@ -115,13 +116,13 @@ message ControllerSettings {
 
   // Session settings
   required string name                    = 1 [(nanopb).max_size = 100];
-  
+
   // Controller settings
   required uint32       sensor_index      = 2;
   required SetpointType setpoint_type     = 3;
   optional float        static_setpoint   = 4;
   optional uint32       temp_profile_id   = 5;
-  
+
   // Output settings
   repeated OutputSettings output_settings = 6 [(nanopb).max_count = 2];
 
