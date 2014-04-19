@@ -67,6 +67,16 @@ message FirmwareDownloadResponse {
   required bytes  data   = 2 [(nanopb).max_size = 1024];
 }
 
+message DeviceSettings {
+  enum ControlMode {
+    ON_OFF = 0;
+    PID    = 1;
+  }
+  
+  required string name              = 1 [(nanopb).max_size = 100];
+  required ControlMode control_mode = 2;
+}
+
 message TempProfileStep {
   enum TempProfileStepType {
   	HOLD = 0;
@@ -91,16 +101,10 @@ message OutputSettings {
     COOLING = 1;
     MANUAL  = 2;
   }
-  
-  enum OutputControlMode {
-    ON_OFF = 0;
-    PID    = 1;
-  }
 
   required uint32 index                    = 1;
   required Function function               = 2;
   required uint32 cycle_delay              = 3;
-  required OutputControlMode output_mode   = 4;
 }
 
 message ControllerSettings {
@@ -138,7 +142,8 @@ message ApiMessage {
     FIRMWARE_UPDATE_CHECK_RESPONSE = 9;
     FIRMWARE_DOWNLOAD_REQUEST      = 10;
     FIRMWARE_DOWNLOAD_RESPONSE     = 11;
-    CONTROLLER_SETTINGS            = 12;
+    DEVICE_SETTINGS                = 12;
+    CONTROLLER_SETTINGS            = 13;
   }
 
   required Type type = 1;
@@ -154,5 +159,6 @@ message ApiMessage {
   optional FirmwareUpdateCheckResponse firmwareUpdateCheckResponse = 10;
   optional FirmwareDownloadRequest     firmwareDownloadRequest     = 11;
   optional FirmwareDownloadResponse    firmwareDownloadResponse    = 12;
-  optional ControllerSettings          controllerSettings           = 13;
+  optional DeviceSettings              deviceSettings              = 13;
+  optional ControllerSettings          controllerSettings          = 14;
 }
