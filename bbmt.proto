@@ -28,10 +28,11 @@ message ControllerReport {
   required uint32 controller_index = 1;
   required float sensor_reading    = 2;
   required float setpoint          = 3;
+  optional uint32 timestamp        = 4;
 }
 
 message DeviceReport {
-  repeated ControllerReport controller_reports = 1 [(nanopb).max_count = 8];
+  repeated ControllerReport controller_reports = 1 [(nanopb).max_count = 64];
 }
 
 message Error {
