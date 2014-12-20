@@ -1,5 +1,10 @@
 import "nanopb.proto";
 
+// Sent by the server to provide the current time to the unit
+message ServerTime {
+  required int32 timestamp = 1;
+}
+
 // Sent by device to initiate activation process
 message ActivationTokenRequest {
   required string device_id = 1 [(nanopb).max_size = 64];
@@ -146,6 +151,7 @@ message ApiMessage {
     FIRMWARE_DOWNLOAD_RESPONSE     = 11;
     DEVICE_SETTINGS                = 12;
     CONTROLLER_SETTINGS            = 13;
+    SERVER_TIME                    = 14;
   }
 
   required Type type = 1;
@@ -163,4 +169,5 @@ message ApiMessage {
   optional FirmwareDownloadResponse    firmwareDownloadResponse    = 12;
   optional DeviceSettings              deviceSettings              = 13;
   optional ControllerSettings          controllerSettings          = 14;
+  optional ServerTime                  serverTime                  = 15;
 }
