@@ -24,7 +24,7 @@ else
     INCLUDES += -I/usr/include
   endif
   ifeq ($(UNAME_S),Darwin)
-    INCLUDES += -I/usr/local/Cellar/protobuf/2.5.0/include
+    INCLUDES += -I/usr/local/Cellar/protobuf/2.6.0/include
   endif
 endif
 
