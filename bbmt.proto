@@ -120,20 +120,31 @@ message ControllerSettings {
     TEMP_PROFILE = 1;
   }
 
+  enum CompletionAction {
+    HOLD_LAST = 0;
+    START_OVER = 1;
+  }
+
   // Session settings
-  required string name                    = 1 [(nanopb).max_size = 100];
+  required string name = 1 [(nanopb).max_size = 100];
 
   // Controller settings
-  required uint32       sensor_index      = 2;
-  required SetpointType setpoint_type     = 3;
-  optional float        static_setpoint   = 4;
-  optional uint32       temp_profile_id   = 5;
+  required uint32 sensor_index = 2;
+  required SetpointType setpoint_type = 3;
+
+  // Static setpoint options
+  optional float static_setpoint = 4;
+
+  // Temp profile options
+  optional uint32 temp_profile_id = 5;
+  optional int32 temp_profile_start_point = 8;
+  optional CompletionAction temp_profile_completion_action = 9;
 
   // Output settings
   repeated OutputSettings output_settings = 6 [(nanopb).max_count = 2];
 
   // Temp profiles
-  repeated TempProfile temp_profiles      = 7 [(nanopb).max_count = 2];
+  repeated TempProfile temp_profiles = 7 [(nanopb).max_count = 2];
 }
 
 message ApiMessage {
