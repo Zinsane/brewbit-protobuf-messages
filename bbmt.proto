@@ -33,7 +33,15 @@ message ControllerReport {
   required uint32 controller_index = 1;
   required float sensor_reading    = 2;
   required float setpoint          = 3;
-  optional uint32 timestamp        = 4;
+  required bool output1_status     = 4;
+  required bool output2_status     = 5;
+  required float output1_kp        = 6;
+  required float output1_ki        = 7;
+  required float output1_kd        = 8;
+  required float output2_kp        = 9;
+  required float output2_ki        = 10;
+  required float output2_kd        = 11;
+  optional uint32 timestamp        = 12;
 }
 
 message DeviceReport {
