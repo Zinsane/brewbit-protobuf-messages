@@ -29,19 +29,20 @@ message AuthResponse {
   required bool authenticated = 1;
 }
 
+message OutputStatus {
+  optional uint32 output_index = 1;
+  optional bool status  = 2;
+  optional float kp     = 3;
+  optional float ki     = 4;
+  optional float kd     = 5;
+}
+
 message ControllerReport {
   required uint32 controller_index = 1;
   required float sensor_reading    = 2;
   required float setpoint          = 3;
   optional uint32 timestamp        = 4;
-  optional bool output1_status     = 5;
-  optional bool output2_status     = 6;
-  optional float output1_kp        = 7;
-  optional float output1_ki        = 8;
-  optional float output1_kd        = 9;
-  optional float output2_kp        = 10;
-  optional float output2_ki        = 11;
-  optional float output2_kd        = 12;  
+  repeated OutputStatus output_status = 5 [(nanopb).max_count = 2];
 }
 
 message DeviceReport {
