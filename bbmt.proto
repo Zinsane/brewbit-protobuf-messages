@@ -133,9 +133,15 @@ message ControllerSettings {
     HOLD_LAST = 0;
     START_OVER = 1;
   }
+  
+  enum SessionUpdateAction {
+    CREATE_SESSION = 0;
+    EDIT_SESSION = 1;
+  }
 
   // Session settings
   required string name = 1 [(nanopb).max_size = 100];
+  optional SessionUpdateAction session_update_action = 10;
 
   // Controller settings
   required uint32 sensor_index = 2;
