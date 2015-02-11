@@ -31,7 +31,7 @@ endif
 
 all: $(BIN_DIR)/messages.rb
 
-$(BIN_DIR)/messages.rb: | $(BIN_DIR) $(OBJ_DIR)
+$(BIN_DIR)/messages.rb: $(SRC) | $(BIN_DIR) $(OBJ_DIR)
 	cd $(OBJ_DIR) && BEEFCAKE_NAMESPACE=$(BEEFCAKE_NAMESPACE) $(PROTOC_BIN) $(RUBY_OPTIONS) $(INCLUDES) $(SRC)
 	cp $(OBJ_DIR)/bbmt.pb.rb $(BIN_DIR)/messages.rb
 
